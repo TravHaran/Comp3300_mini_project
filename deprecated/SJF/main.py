@@ -7,7 +7,7 @@ def load_input(filename):
         return json.load(f)
 
 
-def sjf_non_preemptive(jobs):
+def sjf(jobs):
     time = 0
     completed = 0
     n = len(jobs)
@@ -16,23 +16,23 @@ def sjf_non_preemptive(jobs):
     turnaround = {}
     waiting = {}
 
-    # Keep track of which jobs are finished
+    # keep track of which jobs are finished
     done = set()
 
     while completed < n:
         ready = []
 
-        # Find all jobs that have arrived and are not done
+        # find all jobs that have arrived and are not done
         for job in jobs:
             if job["arrival"] <= time and job["pid"] not in done:
                 ready.append(job)
 
-        # If no job is ready, move time forward
+        # if no job is ready, move time forward
         if not ready:
             time += 1
             continue
 
-        # SJF: pick smallest burst
+        # SJF: i.e. pick smallest burst
         # Tie-breaker: lexicographically smallest PID
         ready.sort(key=lambda job: (job["burst"], job["pid"]))
         current = ready[0]
@@ -46,10 +46,10 @@ def sjf_non_preemptive(jobs):
             "end": end_time
         })
 
-        # Update time after job finishes
+        # update time after job finishes
         time = end_time
 
-        # Compute metrics
+        # compute metrics
         ta = end_time - current["arrival"]
         wt = ta - current["burst"]
 
@@ -74,12 +74,14 @@ def main():
 
     policy = data["policy"]
     jobs = data["jobs"]
+    
+    if policy == "SJF":
+        gantt, turnaround, waiting, avg_turnaround, avg_waiting = sjf(jobs)  
+    else:
+        print(json.dumps({"error": "This version only supports FIFO, Round Robin, SJF, and Priority"}))
+        sys.exit(0) 
 
-    if policy != "SJF":
-        print(json.dumps({"error": "This version only supports SJF"}))
-        sys.exit(0)
-
-    gantt, turnaround, waiting, avg_turnaround, avg_waiting = sjf_non_preemptive(jobs)
+    
 
     output = {
         "policy": policy,
