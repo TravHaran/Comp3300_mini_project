@@ -1,0 +1,22 @@
+{
+  "policy": "SJF",
+  "gantt": [
+    {"pid": "B", "start": 0, "end": 2},
+    {"pid": "C", "start": 2, "end": 5},
+    {"pid": "A", "start": 5, "end": 11}
+  ],
+  "metrics": {
+    "turnaround": {
+      "A": 11,
+      "B": 2,
+      "C": 4
+    },
+    "waiting": {
+      "A": 5,
+      "B": 0,
+      "C": 1
+    },
+    "avg_turnaround": 5.67,
+    "avg_waiting": 2.0
+  }
+}

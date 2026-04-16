@@ -13,6 +13,8 @@ configurable quantum)
 The simulator reads input from a JSON file and produces output strictly
 in JSON format.
 
+**Sample input/output json files for each algorithm can be found in the 'sample' folder**
+
 ------------------------------------------------------------------------
 
 ## How to Run
