@@ -1,0 +1,34 @@
+{
+  "policy": "PRIORITY",
+  "gantt": [
+    {
+      "pid": "B",
+      "start": 0,
+      "end": 2
+    },
+    {
+      "pid": "C",
+      "start": 2,
+      "end": 5
+    },
+    {
+      "pid": "A",
+      "start": 5,
+      "end": 11
+    }
+  ],
+  "metrics": {
+    "turnaround": {
+      "B": 2,
+      "C": 4,
+      "A": 11
+    },
+    "waiting": {
+      "B": 0,
+      "C": 1,
+      "A": 5
+    },
+    "avg_turnaround": 5.67,
+    "avg_waiting": 2.0
+  }
+}

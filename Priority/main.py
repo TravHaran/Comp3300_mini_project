@@ -24,7 +24,7 @@ def priority_non_preemptive(jobs):
             time += 1
             continue
 
-        # Priority: pick lowest priority number (highest priority)
+        # Priority: pick lowest priority number
         # Tie-breaker: lexicographically smallest PID
         ready.sort(key=lambda job: (job["priority"], job["pid"]))
         current = ready[0]
